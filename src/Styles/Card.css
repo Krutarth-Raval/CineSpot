@@ -1,0 +1,65 @@
+@import "../Styles/variables.css";
+.card {
+  height: 100%;
+  width: 100%;
+  /* border: 1px solid yellow; */
+  overflow: hidden;
+  position: relative;
+  list-style: none;
+}
+
+.card-index {
+  position: absolute;
+  top: clamp(2px, 1vw, 10px);
+  left: clamp(2px, 1vw, 10px);
+  background: var(--bg-color);
+  height: clamp(20px, 2vw, 30px);
+  width: clamp(20px, 2vw, 30px);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: var(--metadata-font);
+}
+.card-image {
+  width: 100%;
+  height: 700px;
+}
+.card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-title {
+  font-weight: bold;
+  position: absolute;
+  text-align: center;
+  left: 50%;
+  transform: translate(-50%);
+  bottom: 30px;
+  background-color: var(--bg-color);
+  padding: 5px 10px;
+  color: var(--primary-color);
+  font-size: var(--title-font);
+}
+
+@media (max-width: 1700px) {
+  .card-image {
+    height: auto;
+  }
+}
+@media (max-width: 1000px) {
+  .card-image {
+    height: auto;
+  }
+}
+@media (max-width: 768px) {
+  .card-image {
+    height: auto;
+  }
+  .card-title {
+    bottom: 5px;
+   
+  }
+}

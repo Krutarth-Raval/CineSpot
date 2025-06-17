@@ -1,0 +1,92 @@
+@import "../Styles/variables.css";
+
+.news-container {
+  width: 95%;
+  max-width: 1400px;
+  margin: 15px auto 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  padding: 1rem;
+}
+
+.news-container-title {
+  font-size: clamp(var(--small-font-size), 3vw, var(--font-size));
+  width: 100%;
+  text-align: left;
+  padding: 1.2rem;
+  margin: 0;
+  border-radius: 12px;
+  background-color: var(--container-bg);
+  color: var(--text-color);
+  border-left: 6px solid var(--primary-color);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+
+.news-box {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
+  width: 100%;
+  padding: 1.5rem;
+  background-color: var(--bg-color);
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 1200px) {
+  .news-container {
+    width: 98%;
+  }
+
+  .news-box {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    padding: 1.2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .news-container {
+    width: 100%;
+    margin-top: 70px;
+    padding: 0.8rem;
+  }
+
+  .news-container-title {
+    padding: 1rem;
+    font-size: clamp(1.2rem, 2.5vw, 2rem);
+  }
+
+  .news-box {
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .news-container {
+    margin-top: 60px;
+    padding: 0.5rem;
+  }
+
+  .news-container-title {
+    padding: 0.8rem;
+    font-size: clamp(1rem, 2vw, 1.5rem);
+  }
+
+  .news-container-title::before {
+    font-size: 1.5rem;
+  }
+
+  .news-box {
+    gap: 1rem;
+    padding: 0.8rem;
+  }
+}

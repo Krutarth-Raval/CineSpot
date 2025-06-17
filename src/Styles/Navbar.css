@@ -1,0 +1,47 @@
+@import "../Styles/variables.css";
+
+.navbar {
+  background-color: var(--container-bg);
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  padding: 5px 5px;
+  display: flex;
+  align-items: center;
+  border-radius: 12px;
+}
+.logo-text {
+  background-color: var(--bg-color);
+  padding: 5px 10px;
+  font-size: 42px;
+  color: var(--primary-color);
+  font-family: var(--logo-font);
+  border-radius: 8px;
+}
+
+.navbar-links {
+  color: var(--text-color);
+  font-size:var(--title-font);
+  width: 100%;
+  margin-left: 30px;
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  gap: 10px;
+}
+.navbar-links .link {
+  padding: 5px 10px;
+}
+.navbar-login .link,
+.navbar-login .link {
+  font-size: var(--title-font);
+  color: var(--text-color);
+}
+.navbar-login {
+  margin-right: 10px;
+}
+@media (max-width: 1300px) {
+  .navbar {
+    display: none;
+  }
+}

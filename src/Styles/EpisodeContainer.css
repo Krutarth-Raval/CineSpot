@@ -1,0 +1,119 @@
+@import "../Styles/variables.css";
+
+.episode-card {
+  background-color: var(--bg-color);
+  background: #000814dc;
+  box-shadow: 0 0 10px var(--bg-color);
+  display: flex;
+  border-radius: 12px;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px;
+  /* border: 1px solid var(--text-color); */
+  width: 100%;
+  box-sizing: border-box;
+}
+.ep-number {
+  /* background-color: var(--container-bg); */
+  border: 2px solid var(--container-bg);
+  padding: 5px 10px;
+  font-size: var(--metadata-font);
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  gap: 10px;
+  border-radius: 8px;
+  justify-content: center;
+}
+.ep-number span {
+  color: var(--primary-color);
+  font-size: var(--discription-font);
+}
+.episode-runtime-vote {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: right;
+  gap: 20px;
+}
+.episode-runtime-vote .ep-runtime {
+  font-size: var(--metadata-font);
+  background-color: var(--primary-color);
+  padding: 5px 10px;
+  border-radius: 8px;
+  font-weight: bold;
+  color: var(--bg-color);
+}
+
+.ep-vote {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+}
+
+.ep-vote-average,
+.ep-vote-count {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: var(--metadata-font);
+  font-weight: bold;
+  gap: 5px;
+  border: 2px solid var(--primary-color);
+  padding: 5px 10px;
+  border-radius: 8px;
+  color: var(--text-color);
+}
+
+.ep-vote-average .star-icon {
+  color: goldenrod;
+}
+.ep-vote-count .thumbup-icon {
+  color: rgb(0, 183, 255);
+}
+.episode-description {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  /* flex-direction: row; */
+  align-items: stretch;
+  gap: 20px;
+  width: 100%;
+}
+.episode-name {
+  font-size: var(--title-font);
+  font-weight: 600;
+  color: var(--primary-color);
+  background-color: var(--container-bg);
+  padding: 5px 10px;
+  border-radius: 8px;
+}
+
+.episode-image {
+  max-width: 500px;
+  height: auto;
+  border-radius: 8px;
+}
+
+.episode-image img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+  /* border: 2px solid var(--text-color); */
+}
+.episode-overview {
+  font-size: var(--discription-font);
+  color: var(--text-color);
+}
+@media (max-width: 1024px) {
+  .episode-description {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .episode-runtime-vote {
+    justify-content: space-between;
+  }
+}

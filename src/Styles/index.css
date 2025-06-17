@@ -1,0 +1,21 @@
+@import "../../src/Styles/variables.css"; /* Import global color variables */
+
+/* 1. Reset default styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* 2. Global body styles */
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: var(--primary-font);
+}
+
+/* 3. Global link styles */
+a {
+  text-decoration: none;
+  color: inherit;
+}
