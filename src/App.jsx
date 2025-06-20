@@ -22,7 +22,7 @@ import {
 } from "./API/SeriesData";
 import Login from "./Pages/Login";
 import { News } from "./Pages/News";
-import { NewsData } from "./API/NewsData";
+import NewsData  from "./API/NewsData";
 import { MovieOverview } from "./Pages/MovieOverview";
 import { MovieDetailsData } from "./API/MovieDetailsData";
 import { SeriesOverview } from "./Pages/SeriesOverview";
