@@ -3,15 +3,15 @@ import { useLoaderData, useParams } from "react-router-dom";
 import StarIcon from "@mui/icons-material/Star";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import WhatshotIcon from "@mui/icons-material/Whatshot";
-import "../Styles/SeriesOverview.css";
+import styles from "../Styles/SeriesOverview.module.css";
 import SeriesSeasonsData from "../API/SeriesSeasonsData";
 import SeasonsData from "../API/SeasonsData";
 import { EpisodeContainer } from "../Components/UI/EpisodeContainer";
 import { Recommendations } from "../Components/UI/Recommendations";
-
+import { useMemo } from "react";
 export const SeriesOverview = () => {
   const params = useParams();
-  const SeriesDetails = useLoaderData();
+  const SeriesDetails = useLoaderData() || {};
   const {
     backdrop_path,
     created_by,
@@ -38,20 +38,30 @@ export const SeriesOverview = () => {
     vote_average,
     vote_count,
   } = SeriesDetails;
+
+  // Get full language name from ISO code
   const getFullLanguageName = (code) => {
     return (
       new Intl.DisplayNames(["en"], { type: "language" }).of(code) || "Unknown"
     );
   };
+  // Production status
   const production_status = () => (in_production ? "TRUE" : "FALSE");
 
+  // Get full country name from ISO code
   const getFullCountryName = (code) => {
     return (
       new Intl.DisplayNames(["en"], { type: "region" }).of(code) || "Unknown"
     );
   };
-  const trailer = videos.results.find((vid) => vid.type === "Trailer");
-  // writers and creator ------
+
+  // Get the trailer from videos
+  const trailer = useMemo(
+    () => videos?.results?.find((vid) => vid.type === "Trailer"),
+    [videos]
+  );
+
+  // writers and creator
   const writers =
     credits?.crew && credits.crew.length > 0
       ? credits.crew
@@ -61,6 +71,14 @@ export const SeriesOverview = () => {
           .map((person) => person.name)
           .join(", ") || "UNKNOWN"
       : "UNKNOWN";
+
+  // // Fallback profile image URL
+  const fallbackProfile =
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwmcW4ArHlmZNzIvD5FxdPa-dh36prtR01_Q&s";
+
+     // Function to get the image URL with a fallback
+  const getImageUrl = (path, size = "w200") =>
+    path ? `https://image.tmdb.org/t/p/${size}/${path}` : "fallback_img_url";
 
   //   media content ------
   const [modalOpen, setModalOpen] = useState(false);
@@ -108,50 +126,51 @@ export const SeriesOverview = () => {
 
   return (
     <>
-      <div className="top-container">
-        <div className="banner-container">
+      <div className={styles.top_container}>
+        <div className={styles.banner_container}>
           <img
             src={`https://image.tmdb.org/t/p/w1280/${backdrop_path}`}
             alt={name}
           />
-          <div className="series-first-air-year">
-            <p className="year">{first_air_date.split("-")[0]}</p>
+          <div className={styles.series_first_air_year}>
+            <p className={styles.year}>
+              {first_air_date ? first_air_date.split("-")[0] : "N/A"}
+            </p>
           </div>
         </div>
-        <div className="series-network">
+        <div className={styles.series_network}>
           {networks.map(({ name, logo_path }, index) => (
-            <div key={index} className="network-item">
-              {/* <p className="network-name">{name}</p> */}
+            <div key={index} className={styles.network_item}>
               {logo_path && (
                 <img
                   src={`https://image.tmdb.org/t/p/w200/${logo_path}`}
                   alt={name}
-                  className="network-logo"
+                  className={styles.network_logo}
                 />
               )}
             </div>
           ))}
         </div>
 
-        <div className="series-poster">
+        <div className={styles.series_poster}>
           <img
             src={`https://image.tmdb.org/t/p/w1280/${poster_path}`}
             alt={name}
           />
         </div>
-        <div className="media-box">
-          <div className="backdrops-media-box">
+        <div className={styles.media_box}>
+          <div className={styles.backdrops_media_box}>
             <button
-              className="series-backdrops-btn"
+              className={styles.series_backdrops_btn}
               onClick={() => openModal("backdrops")}
             >
               BACKDROPS
             </button>
           </div>
 
-          <div className="videos-media-box">
+          <div className={styles.videos_media_box}>
             <button
-              className="series-videos-btn"
+              className={styles.series_videos_btn}
               onClick={() => openModal("videos")}
             >
               VIDEOS
@@ -159,15 +178,18 @@ export const SeriesOverview = () => {
           </div>
         </div>
         {modalOpen && (
-          <div className="modal-container" onClick={closeModal}>
-            <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-              <button className="modal-close-btn" onClick={closeModal}>
+          <div className={styles.modal_container} onClick={closeModal}>
+            <div
+              className={styles.modal_content}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button className={styles.modal_close_btn} onClick={closeModal}>
                 ✖
               </button>
 
-              <div className="modal-items">
+              <div className={styles.modal_items}>
                 {modalContent.map((item, index) => (
-                  <div key={index} className="modal-item">
+                  <div key={index} className={styles.modal_item}>
                     {item.file_path ? (
                       <img
                         src={`https://image.tmdb.org/t/p/w780/${item.file_path}`}
@@ -187,46 +209,47 @@ export const SeriesOverview = () => {
           </div>
         )}
       </div>
-      <div className="series-information">
-        <p className="name">{name.toUpperCase()}</p>
 
-        <div className="series-genres-seasons">
-          <div className="series-genre">
+      <div className={styles.series_information}>
+        <p className={styles.name}>{name.toUpperCase()}</p>
+
+        <div className={styles.series_genres_seasons}>
+          <div className={styles.series_genre}>
             {genres.map((genre) => (
-              <p className="genres" key={genre.id}>
+              <p className={styles.genres} key={genre.id}>
                 {genre.name.toUpperCase()}
               </p>
             ))}
           </div>
-          <div className="seasons">SEASONS {number_of_seasons}</div>
+          <div className={styles.seasons}>SEASONS {number_of_seasons}</div>
         </div>
-        <div className="series-rating-box">
-          <div className="series-vote-average">
-            <p className="vote-average">
-              <StarIcon className="star-icon" />
+        <div className={styles.series_rating_box}>
+          <div className={styles.series_vote_average}>
+            <p className={styles.vote_average}>
+              <StarIcon className={styles.star_icon} />
               {vote_average.toFixed(1)}
-              {/* /<span>10</span> */}
             </p>
           </div>
-          <div className="series-vote-count">
-            <p className="vote-count">
-              <ThumbUpIcon className="thumbup-icon" />
+          <div className={styles.series_vote_count}>
+            <p className={styles.vote_count}>
+              <ThumbUpIcon className={styles.thumbup_icon} />
               {vote_count}
             </p>
           </div>{" "}
-          <div className="series-popularity">
-            <p className="popularity">
-              <WhatshotIcon className="whatshot-icon" />
+          <div className={styles.series_popularity}>
+            <p className={styles.popularity}>
+              <WhatshotIcon className={styles.whatshot_icon} />
               {popularity}
             </p>
           </div>
         </div>
       </div>
-      <div className="middle-container">
-        <div className="series-trailer-details">
-          <div className="series-trailer-box">
-            <p className="series-trailer-title">OFFICIAL TRAILER</p>
-            <div className="series-trailer">
+
+      <div className={styles.middle_container}>
+        <div className={styles.series_trailer_details}>
+          <div className={styles.series_trailer_box}>
+            <p className={styles.series_trailer_title}>OFFICIAL TRAILER</p>
+            <div className={styles.series_trailer}>
               <iframe
                 src={`https://www.youtube.com/embed/${trailer?.key}?autoplay=1&mute=0&controls=1&modestbranding=1&rel=0&showinfo=0&fs=1&iv_load_policy=3&loop=1&playlist=${trailer?.key}`}
                 allow="autoplay; encrypted-media"
@@ -234,19 +257,19 @@ export const SeriesOverview = () => {
               ></iframe>
             </div>
           </div>
-          <div className="series-details">
-            <div className="series-overview">
-              <p className="series-overview-title">OVERVIEW</p>
-              <p className="overview">{overview}</p>
+          <div className={styles.series_details}>
+            <div className={styles.series_overview}>
+              <p className={styles.series_overview_title}>OVERVIEW</p>
+              <p className={styles.overview}>{overview}</p>
             </div>
-            <div className="series-tagline">
-              <p className="series-tagline-title">TAGLINE</p>
-              <p className="tagline">{tagline}</p>
+            <div className={styles.series_tagline}>
+              <p className={styles.series_tagline_title}>TAGLINE</p>
+              <p className={styles.tagline}>{tagline}</p>
             </div>
 
-            <div className="series-director">
-              <p className="series-director-title">CREATOR</p>
-              <p className="director-name">
+            <div className={styles.series_director}>
+              <p className={styles.series_director_title}>CREATOR</p>
+              <p className={styles.director_name}>
                 {created_by && created_by.length > 0
                   ? created_by
                       .map((person) => person.name.toUpperCase())
@@ -254,9 +277,9 @@ export const SeriesOverview = () => {
                   : "UNKNOWN"}
               </p>
             </div>
-            <div className="series-writer">
-              <p className="series-writer-title">WRITER</p>
-              <p className="writer-name">
+            <div className={styles.series_writer}>
+              <p className={styles.series_writer_title}>WRITER</p>
+              <p className={styles.writer_name}>
                 {writers && writers.trim() !== ""
                   ? writers.toUpperCase()
                   : "UNKNOWN"}
@@ -265,20 +288,20 @@ export const SeriesOverview = () => {
           </div>
         </div>
       </div>
-      <div className="season-container">
-        {/* Season Dropdown */}
-        <div className="select-season">
-          <p className="select-season-title">SELECT SEASON</p>
+
+      <div className={styles.season_container}>
+        <div className={styles.select_season}>
+          <p className={styles.select_season_title}>SELECT SEASON</p>
           <select
-            className="season-dropdown"
+            className={styles.season_dropdown}
             onChange={handleSeasonChange}
             value={selectedSeason}
           >
             {seasons
-              .filter((season) => season.season_number !== 0) // Skip season 0
+              .filter((season) => season.season_number !== 0)
               .map((season) => (
                 <option
-                  className="season-numbers"
+                  className={styles.season_numbers}
                   key={season.id}
                   value={season.season_number}
                 >
@@ -288,33 +311,33 @@ export const SeriesOverview = () => {
           </select>
         </div>
 
-        {/* 🆕 New Season Info Container */}
-        <div className="season-info-container">
-          <div className="season-year-vote-average">
-            {" "}
-            <p className="season-number">
+        <div className={styles.season_info_container}>
+          <div className={styles.season_year_vote_average}>
+            <p className={styles.season_number}>
               SEASON {season[selectedSeason]?.season_number}
             </p>
-            <p className="air-date">
-              {season[selectedSeason]?.air_date.split("-", 1) || "NONE"}
+            <p className={styles.air_date}>
+              {season[selectedSeason]?.air_date
+                ? season[selectedSeason].air_date.split("-")[1]
+                : "NONE"}
             </p>
-            <p className="season-vote">
-              <StarIcon className="star-icon" />
+
+            <p className={styles.season_vote}>
+              <StarIcon className={styles.star_icon} />
               {seasons[selectedSeason]?.vote_average?.toFixed(1) || "N/A"}
             </p>
           </div>
-          <div className="season-overview">
-            <p className="seasonOverviewTitle">SEASON OVERVIEW</p>
-            <p className="seasonOverview">
+          <div className={styles.season_overview}>
+            <p className={styles.seasonOverviewTitle}>SEASON OVERVIEW</p>
+            <p className={styles.seasonOverview}>
               {season[selectedSeason]?.overview || "No Overview"}
             </p>{" "}
           </div>
         </div>
 
-        {/* Episode List */}
-        <div className="episode-container">
-          <p className="episode-list-title">EPISODES</p>
-          <div className="episode-list">
+        <div className={styles.episode_container}>
+          <p className={styles.episode_list_title}>EPISODES</p>
+          <div className={styles.episode_list}>
             {episodes.map((curEpisode, index) => (
               <div key={curEpisode.id}>
                 <EpisodeContainer curEpisode={curEpisode} index={index} />
@@ -323,73 +346,19 @@ export const SeriesOverview = () => {
           </div>
         </div>
       </div>
-      <div className="third-container">
-        <div className="series-cast">
-          <p className="series-cast-title">CAST</p>
-          <div className="series-cast-list">
-            {credits.cast.map((actor, index) => (
-              <div className="series-cast-item" key={`${actor.id}-${index}`}>
-                <div className="series-cast-image">
-                  <p className="cast-index">
-                    {index + 1}/{credits.cast.length}
-                  </p>
-                  <img
-                    src={
-                      actor.profile_path
-                        ? `https://image.tmdb.org/t/p/w200/${actor.profile_path}`
-                        : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwmcW4ArHlmZNzIvD5FxdPa-dh36prtR01_Q&s" // Fallback image if no profile found
-                    }
-                    alt={actor.name}
-                  />
-                </div>
-                <div className="series-cast-box">
-                  <p className="series-cast-name">{actor.name.toUpperCase()}</p>
-                  <p className="series-cast-role">
-                    {actor.character ? actor.character.toUpperCase() : "N/A"}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-        <div className="series-crew">
-          <p className="series-crew-title">CREW</p>
-          <div className="series-crew-list">
-            {credits.crew.map((actor, index) => (
-              <div className="series-crew-item" key={`${actor.id}-${index}`}>
-                <div className="series-crew-image">
-                  <p className="crew-index">
-                    {index + 1}/{credits.crew.length}
-                  </p>
-                  <img
-                    src={
-                      actor.profile_path
-                        ? `https://image.tmdb.org/t/p/w200/${actor.profile_path}`
-                        : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwmcW4ArHlmZNzIvD5FxdPa-dh36prtR01_Q&s" // Fallback image if no profile found
-                    }
-                    alt={actor.name}
-                  />
-                </div>
-                <div className="series-crew-box">
-                  <p className="series-crew-name">{actor.name.toUpperCase()}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-      <div className="forth-container">
-        <p className="series-data-title">PRODUCTION INSIGHTS</p>
-        <div className="series-data">
-          <div className="original-language">
-            <p className="original-language-title">ORIGINAL LANGUAGE</p>
-            <p className="originalLanguage">
+
+      <div className={styles.forth_container}>
+        <p className={styles.series_data_title}>PRODUCTION INSIGHTS</p>
+        <div className={styles.series_data}>
+          <div className={styles.original_language}>
+            <p className={styles.original_language_title}>ORIGINAL LANGUAGE</p>
+            <p className={styles.originalLanguage}>
               {getFullLanguageName(original_language).toUpperCase()}
             </p>
           </div>
-          <div className="spoken-languages">
-            <p className="spoken-languages-title">SPOKEN LANGUAGES</p>
-            <p className="spokenLanguages">
+          <div className={styles.spoken_languages}>
+            <p className={styles.spoken_languages_title}>SPOKEN LANGUAGES</p>
+            <p className={styles.spokenLanguages}>
               {spoken_languages && spoken_languages.length > 0
                 ? spoken_languages
                     .slice(0, 5)
@@ -399,16 +368,16 @@ export const SeriesOverview = () => {
                 : "UNKNOWN"}
             </p>
           </div>
-          <div className="in-production">
-            <p className="in-production-title">RELEASED DATE</p>
-            <p className="inProduction">{`${
+          <div className={styles.in_production}>
+            <p className={styles.in_production_title}>IN PRODUCTION</p>
+            <p className={styles.inProduction}>{`${
               in_production ? "TRUE" : "FALSE"
             }`}</p>
           </div>
 
-          <div className="origin-country">
-            <p className="origin-country-title">ORIGIN COUNTRY</p>
-            <p className="origin-country-name">
+          <div className={styles.origin_country}>
+            <p className={styles.origin_country_title}>ORIGIN COUNTRY</p>
+            <p className={styles.origin_country_name}>
               {origin_country && origin_country.length > 0
                 ? origin_country
                     .map((code) => getFullCountryName(code))
@@ -417,9 +386,11 @@ export const SeriesOverview = () => {
                 : "UNKNOWN"}
             </p>
           </div>
-          <div className="production-companies">
-            <p className="production-companies-title">PRODUCTION COMPANIES</p>
-            <p className="production-companies-name">
+          <div className={styles.production_companies}>
+            <p className={styles.production_companies_title}>
+              PRODUCTION COMPANIES
+            </p>
+            <p className={styles.production_companies_name}>
               {production_companies && production_companies.length > 0
                 ? production_companies
                     .map((company) => company.name)
@@ -429,9 +400,9 @@ export const SeriesOverview = () => {
             </p>
           </div>
 
-          <div className="production-countries">
-            <p className="production-countries-title">ORIGIN COUNTRY</p>
-            <p className="production-countries-name">
+          <div className={styles.production_countries}>
+            <p className={styles.production_countries_title}>ORIGIN COUNTRY</p>
+            <p className={styles.production_countries_name}>
               {production_countries && production_countries.length > 0
                 ? production_countries
                     .map((country) => getFullCountryName(country.iso_3166_1))
@@ -442,7 +413,79 @@ export const SeriesOverview = () => {
           </div>
         </div>
       </div>
-      <div className="recommendations-section">
+
+      <div className={styles.third_container}>
+       <div className={styles.series_cast}>
+  <p className={styles.series_cast_title}>CAST</p>
+  <div className={styles.series_cast_list}>
+    {credits?.cast && credits.cast.length > 0 ? (
+      credits.cast.map((actor, index) => (
+        <div className={styles.series_cast_item} key={`${actor.id}-${index}`}>
+          <div className={styles.series_cast_image}>
+            <p className={styles.cast_index}>
+              {index + 1}/{credits.cast.length}
+            </p>
+            <img
+              src={
+                actor.profile_path
+                  ? getImageUrl(actor.profile_path)
+                  : fallbackProfile
+              }
+              alt={actor.name}
+            />
+          </div>
+          <div className={styles.series_cast_box}>
+            <p className={styles.series_cast_name}>
+              {actor.name.toUpperCase()}
+            </p>
+            <p className={styles.series_cast_role}>
+              {actor.character ? actor.character.toUpperCase() : "N/A"}
+            </p>
+          </div>
+        </div>
+      ))
+    ) : (
+      <p className={styles.no_data}>NO CAST DATA AVAILABLE</p>
+    )}
+  </div>
+</div>
+
+<div className={styles.series_crew}>
+  <p className={styles.series_crew_title}>CREW</p>
+  <div className={styles.series_crew_list}>
+    {credits?.crew && credits.crew.length > 0 ? (
+      credits.crew.map((actor, index) => (
+        <div className={styles.series_crew_item} key={`${actor.id}-${index}`}>
+          <div className={styles.series_crew_image}>
+            <p className={styles.crew_index}>
+              {index + 1}/{credits.crew.length}
+            </p>
+            <img
+              src={
+                actor.profile_path
+                  ? getImageUrl(actor.profile_path)
+                  : fallbackProfile
+              }
+              alt={actor.name}
+            />
+          </div>
+          <div className={styles.series_crew_box}>
+            <p className={styles.series_crew_name}>
+              {actor.name.toUpperCase()}
+            </p>
+          </div>
+        </div>
+      ))
+    ) : (
+      <p className={styles.no_data}>NO CREW DATA AVAILABLE</p>
+    )}
+  </div>
+</div>
+
+      </div>
+
+      <div className={styles.partion}></div>
+      <div className={styles.recommendations_section}>
         <Recommendations id={id} type="tv" />
       </div>
     </>

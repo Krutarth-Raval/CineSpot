@@ -1,13 +1,13 @@
 import { useLoaderData, useParams } from "react-router-dom";
-import "../Styles/MovieOverview.css";
+import styles from "../Styles/MovieOverview.module.css";
 import StarIcon from "@mui/icons-material/Star";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import WhatshotIcon from "@mui/icons-material/Whatshot";
 import { useState } from "react";
 import { Recommendations } from "../Components/UI/Recommendations";
+
 export const MovieOverview = () => {
   const params = useParams();
-  //   console.log(params);
   const MovieDetails = useLoaderData();
   const {
     backdrop_path,
@@ -36,74 +36,88 @@ export const MovieOverview = () => {
     vote_count,
   } = MovieDetails;
 
+  // Function to format runtime in hours and minutes
+  const formatRuntime = (time) =>
+  time ? `${Math.floor(time / 60)}h ${time % 60}m` : "N/A";
+
+  // Find the trailer from the videos array
   const trailer = videos.results.find((vid) => vid.type === "Trailer");
 
-  const getFullLanguageName = (code) => {
-    return (
-      new Intl.DisplayNames(["en"], { type: "language" }).of(code) || "Unknown"
-    );
-  };
+  // Function to get the full language name from the code
+  const languageDisplay = new Intl.DisplayNames(["en"], { type: "language" });
+const regionDisplay = new Intl.DisplayNames(["en"], { type: "region" });
 
-  const getFullCountryName = (code) => {
-    return (
-      new Intl.DisplayNames(["en"], { type: "region" }).of(code) || "Unknown"
-    );
-  };
+// Function to get the full language and country names
+const getFullLanguageName = (code) => languageDisplay.of(code) || "Unknown";
+const getFullCountryName = (code) => regionDisplay.of(code) || "Unknown";
 
+
+  // Find the director and writers from the credits
   const director = credits.crew.find((person) => person.job === "Director");
+
+  // Collect all writers (Screenplay or Writer) from the credits
   const writers = credits.crew
     .filter((person) => person.job === "Screenplay" || person.job === "Writer")
     .map((person) => person.name)
     .join(", ");
-  // State for modal
+
+        // // Fallback profile image URL
+      const fallbackProfile =
+  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwmcW4ArHlmZNzIvD5FxdPa-dh36prtR01_Q&s";
+
+  
+  // Function to get the image URL with a fallback
+  const getImageUrl = (path, size = "w200") =>
+    path ? `https://image.tmdb.org/t/p/${size}/${path}` : "fallback_img_url";
+
+  // State for modal to show backdrops or videos
   const [modalOpen, setModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState([]);
 
-  // Handle opening modal
   const openModal = (type) => {
     if (type === "backdrops") {
-      setModalContent(images?.backdrops); // Top 10 backdrops
+      setModalContent(images?.backdrops);
     } else if (type === "videos") {
       setModalContent(videos?.results);
     }
     setModalOpen(true);
   };
 
-  // Close modal
   const closeModal = () => setModalOpen(false);
+
   return (
     <>
-      <div className="top-container">
-        <div className="banner-container">
+      <div className={styles.top_container}>
+        <div className={styles.banner_container}>
           <img
             src={`https://image.tmdb.org/t/p/w1280/${backdrop_path}`}
             alt={title}
           />
-          <div className="movie-release-year">
+          <div className={styles.movie_release_year}>
             <span></span>
-            <p className="year">{release_date.split("-")[0]}</p>
+            <p className={styles.year}>{release_date.split("-")[0]}</p>
             <span></span>
           </div>
         </div>
-        <div className="movie-poster">
+        <div className={styles.movie_poster}>
           <img
             src={`https://image.tmdb.org/t/p/w1280/${poster_path}`}
             alt={title}
           />
         </div>
-        <div className="media-box">
-          <div className="backdrops-media-box">
+        <div className={styles.media_box}>
+          <div className={styles.backdrops_media_box}>
             <button
-              className="movie-backdrops-btn"
-              onClick={() => openModal("backdrops")}
+              className={styles.movie_backdrops_btn}
+              onClick={() => openModal("backdrops")}  aria-label="View Backdrops"
             >
               BACKDROPS
             </button>
           </div>
-          <div className="videos-media-box">
+          <div className={styles.videos_media_box}>
             <button
-              className="movie-videos-btn"
-              onClick={() => openModal("videos")}
+              className={styles.movie_videos_btn}
+              onClick={() => openModal("videos")} aria-label="View Videos"
             >
               VIDEOS
             </button>
@@ -111,176 +125,131 @@ export const MovieOverview = () => {
         </div>
 
         {modalOpen && (
-          <div className="modal-container" onClick={closeModal}>
-            <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-              <button className="modal-close-btn" onClick={closeModal}>
+          <div className={styles.modal_container} onClick={closeModal}>
+            <div
+              className={styles.modal_content}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button className={styles.modal_close_btn} onClick={closeModal}>
                 ✖
               </button>
 
-              <div className="modal-items">
-                {modalContent.map((item, index) => (
-                  <div key={index} className="modal-item">
-                    {item.file_path ? (
-                      <img
-                        src={`https://image.tmdb.org/t/p/w780/${item.file_path}`}
-                        alt="Backdrop"
-                      />
-                    ) : (
-                      <iframe
-                        src={`https://www.youtube.com/embed/${item.key}`}
-                        allow="autoplay; encrypted-media"
-                        allowFullScreen
-                      ></iframe>
-                    )}
-                  </div>
-                ))}
+              <div className={styles.modal_items}>
+                {modalContent.length > 0 ? (
+                  modalContent.map((item, index) => (
+                    <div key={index} className={styles.modal_item}>
+                      {item.file_path ? (
+                        <img
+                          src={getImageUrl(item.file_path, "w780")}
+                          alt="Backdrop"
+                        />
+                      ) : (
+                        <iframe
+                          src={`https://www.youtube.com/embed/${item.key}`}
+                          allow="autoplay; encrypted-media"
+                          allowFullScreen
+                        ></iframe>
+                      )}
+                    </div>
+                  ))
+                ) : (
+                  <p className={styles.no_content}>No Content Available</p>
+                )}
               </div>
             </div>
           </div>
         )}
       </div>{" "}
-      <div className="movie-information">
-        <p className="title">{title.toUpperCase()}</p>
+      <div className={styles.movie_information}>
+        <p className={styles.title}>{title.toUpperCase()}</p>
 
-        <div className="movie-genres-runtime">
-          <div className="movie-genre">
+        <div className={styles.movie_genres_runtime}>
+          <div className={styles.movie_genre}>
             {genres.map((genre) => (
-              <p className="genres" key={genre.id}>
+              <p className={styles.genres} key={genre.id}>
                 {genre.name.toUpperCase()}
               </p>
             ))}
           </div>
-          <div className="runtime">
-            {Math.floor(runtime / 60)}h {runtime % 60}m
+          <div className={styles.runtime}>
+            {formatRuntime(runtime)}
           </div>
         </div>
-        <div className="movie-rating-box">
-          <div className="movie-vote-average">
-            <p className="vote-average">
-              <StarIcon className="star-icon" />
+        <div className={styles.movie_rating_box}>
+          <div className={styles.movie_vote_average}>
+            <p className={styles.vote_average}>
+              <StarIcon className={styles.star_icon} />
               {vote_average.toFixed(1)}
-              {/* /<span>10</span> */}
             </p>
           </div>
-          <div className="movie-vote-count">
-            <p className="vote-count">
-              <ThumbUpIcon className="thumbup-icon" />
+          <div className={styles.movie_vote_count}>
+            <p className={styles.vote_count}>
+              <ThumbUpIcon className={styles.thumbup_icon} />
               {vote_count}
             </p>
           </div>{" "}
-          <div className="movie-popularity">
-            <p className="popularity">
-              <WhatshotIcon className="whatshot-icon" />
+          <div className={styles.movie_popularity}>
+            <p className={styles.popularity}>
+              <WhatshotIcon className={styles.whatshot_icon} />
               {popularity}
             </p>
           </div>
         </div>
       </div>
-      <div className="middle-container">
-        <div className="movie-trailer-details">
-          <div className="movie-trailer-box">
-            <p className="movie-trailer-title">OFFICIAL TRAILER</p>
-            <div className="movie-trailer">
-              <iframe
-                src={`https://www.youtube.com/embed/${trailer?.key}?autoplay=1&mute=0&controls=1&modestbranding=1&rel=0&showinfo=0&fs=1&iv_load_policy=3&loop=1&playlist=${trailer?.key}`}
-                allow="autoplay; encrypted-media"
-                allowFullScreen
-              ></iframe>
+      <div className={styles.middle_container}>
+        <div className={styles.movie_trailer_details}>
+          <div className={styles.movie_trailer_box}>
+            <p className={styles.movie_trailer_title}>OFFICIAL TRAILER</p>
+            <div className={styles.movie_trailer}>
+              {trailer ? (
+                <iframe
+                  src={`https://www.youtube.com/embed/${trailer.key}`}
+                  allow="autoplay; encrypted-media"
+                  allowFullScreen
+                ></iframe>
+              ) : (
+                <p>No Trailer Available</p>
+              )}
             </div>
           </div>
 
-          <div className="movie-details">
-            <div className="movie-overview">
-              <p className="movie-overview-title">OVERVIEW</p>
-              <p className="overview">{overview}</p>
+          <div className={styles.movie_details}>
+            <div className={styles.movie_overview}>
+              <p className={styles.movie_overview_title}>OVERVIEW</p>
+              <p className={styles.overview}>{overview || "No Overview Availabel"}</p>
             </div>
-            <div className="movie-tagline">
-              <p className="movie-tagline-title">TAGLINE</p>
-              <p className="tagline">{tagline}</p>
+            <div className={styles.movie_tagline}>
+              <p className={styles.movie_tagline_title}>TAGLINE</p>
+              <p className={styles.tagline}>{tagline || "No Tagline Availabel"}</p>
             </div>
 
-            <div className="movie-director">
-              <p className="movie-director-title">DIRECTOR</p>
-              <p className="director-name">
+            <div className={styles.movie_director}>
+              <p className={styles.movie_director_title}>DIRECTOR</p>
+              <p className={styles.director_name}>
                 {director ? director.name.toUpperCase() : "UNKOWN"}
               </p>
             </div>
-            <div className="movie-writer">
-              <p className="movie-writer-title">WRITER</p>
-              <p className="writer-name">
+            <div className={styles.movie_writer}>
+              <p className={styles.movie_writer_title}>WRITER</p>
+              <p className={styles.writer_name}>
                 {writers ? writers.toUpperCase() : "UNKOWN"}
               </p>
             </div>
           </div>
         </div>
       </div>
-      <div className="third-container">
-        <div className="movie-cast">
-          <p className="movie-cast-title">CAST</p>
-          <div className="movie-cast-list">
-            {credits.cast.map((actor, index) => (
-              <div className="movie-cast-item" key={`${actor.id}-${index}`}>
-                <div className="movie-cast-image">
-                  <p className="cast-index">
-                    {index + 1}/{credits.cast.length}
-                  </p>
-                  <img
-                    src={
-                      actor.profile_path
-                        ? `https://image.tmdb.org/t/p/w200/${actor.profile_path}`
-                        : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwmcW4ArHlmZNzIvD5FxdPa-dh36prtR01_Q&s" // Fallback image if no profile found
-                    }
-                    alt={actor.name}
-                  />
-                </div>
-                <div className="movie-cast-box">
-                  <p className="movie-cast-name">{actor.name.toUpperCase()}</p>
-                  <p className="movie-cast-role">
-                    {actor.character ? actor.character.toUpperCase() : "N/A"}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-        <div className="movie-crew">
-          <p className="movie-crew-title">CREW</p>
-          <div className="movie-crew-list">
-            {credits.crew.map((actor, index) => (
-              <div className="movie-crew-item" key={`${actor.id}-${index}`}>
-                <div className="movie-crew-image">
-                  <p className="crew-index">
-                    {index + 1}/{credits.crew.length}
-                  </p>
-                  <img
-                    src={
-                      actor.profile_path
-                        ? `https://image.tmdb.org/t/p/w200/${actor.profile_path}`
-                        : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwmcW4ArHlmZNzIvD5FxdPa-dh36prtR01_Q&s" // Fallback image if no profile found
-                    }
-                    alt={actor.name}
-                  />
-                </div>
-                <div className="movie-crew-box">
-                  <p className="movie-crew-name">{actor.name.toUpperCase()}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-      <div className="forth-container">
-        <p className="movie-data-title">PRODUCTION INSIGHTS</p>
-        <div className="movie-data">
-          <div className="original-language">
-            <p className="original-language-title">ORIGINAL LANGUAGE</p>
-            <p className="originalLanguage">
+      <div className={styles.forth_container}>
+        <p className={styles.movie_data_title}>PRODUCTION INSIGHTS</p>
+        <div className={styles.movie_data}>
+          <div className={styles.original_language}>
+            <p className={styles.original_language_title}>ORIGINAL LANGUAGE</p>
+            <p className={styles.originalLanguage}>
               {getFullLanguageName(original_language).toUpperCase()}
             </p>
           </div>
-          <div className="spoken-languages">
-            <p className="spoken-languages-title">SPOKEN LANGUAGES</p>
-            <p className="spokenLanguages">
+          <div className={styles.spoken_languages}>
+            <p className={styles.spoken_languages_title}>SPOKEN LANGUAGES</p>
+            <p className={styles.spokenLanguages}>
               {spoken_languages && spoken_languages.length > 0
                 ? spoken_languages
                     .slice(0, 5)
@@ -290,25 +259,25 @@ export const MovieOverview = () => {
                 : "UNKNOWN"}
             </p>
           </div>
-          <div className="released-date">
-            <p className="released-date-title">RELEASED DATE</p>
-            <p className="releasedDate">{release_date}</p>
+          <div className={styles.released_date}>
+            <p className={styles.released_date_title}>RELEASED DATE</p>
+            <p className={styles.releasedDate}>{release_date}</p>
           </div>
-          <div className="budget">
-            <p className="budget-title">BUDGET</p>
-            <p className="budget-money">
+          <div className={styles.budget}>
+            <p className={styles.budget_title}>BUDGET</p>
+            <p className={styles.budget_money}>
               ${budget ? budget.toLocaleString() : "N/A"}
             </p>
           </div>
-          <div className="revenue">
-            <p className="revenue-title">REVENUE</p>
-            <p className="revenue-money">
+          <div className={styles.revenue}>
+            <p className={styles.revenue_title}>REVENUE</p>
+            <p className={styles.revenue_money}>
               ${revenue ? revenue.toLocaleString() : "N/A"}
             </p>
           </div>
-          <div className="origin-country">
-            <p className="origin-country-title">ORIGIN COUNTRY</p>
-            <p className="origin-country-name">
+          <div className={styles.origin_country}>
+            <p className={styles.origin_country_title}>ORIGIN COUNTRY</p>
+            <p className={styles.origin_country_name}>
               {origin_country && origin_country.length > 0
                 ? origin_country
                     .map((code) => getFullCountryName(code))
@@ -317,9 +286,11 @@ export const MovieOverview = () => {
                 : "UNKNOWN"}
             </p>
           </div>
-          <div className="production-companies">
-            <p className="production-companies-title">PRODUCTION COMPANIES</p>
-            <p className="production-companies-name">
+          <div className={styles.production_companies}>
+            <p className={styles.production_companies_title}>
+              PRODUCTION COMPANIES
+            </p>
+            <p className={styles.production_companies_name}>
               {production_companies && production_companies.length > 0
                 ? production_companies
                     .map((company) => company.name)
@@ -329,9 +300,9 @@ export const MovieOverview = () => {
             </p>
           </div>
 
-          <div className="production-countries">
-            <p className="production-countries-title">ORIGIN COUNTRY</p>
-            <p className="production-countries-name">
+          <div className={styles.production_countries}>
+            <p className={styles.production_countries_title}>ORIGIN COUNTRY</p>
+            <p className={styles.production_countries_name}>
               {production_countries && production_countries.length > 0
                 ? production_countries
                     .map((country) => getFullCountryName(country.iso_3166_1))
@@ -342,7 +313,71 @@ export const MovieOverview = () => {
           </div>
         </div>
       </div>
-      <div className="recommendations-section">
+      <div className={styles.third_container}>
+        <div className={styles.movie_cast}>
+          <p className={styles.movie_cast_title}>CAST</p>
+          <div className={styles.movie_cast_list}>
+            {credits.cast.slice(0, 20).map((actor, index) => (
+              <div
+                className={styles.movie_cast_item}
+                key={`${actor.id}-${index}`}
+              >
+                <div className={styles.movie_cast_image}>
+                  <p className={styles.cast_index}>
+                    {index + 1}/20
+                  </p>
+                 
+                   <img
+                    src={
+                      actor.profile_path
+                        ? getImageUrl(actor.profile_path)
+                        : fallbackProfile
+                    }
+                    alt={actor.name}
+                  />
+                </div>
+                <div className={styles.movie_cast_box}>
+                  <p className={styles.movie_cast_name}>
+                    {actor.name.toUpperCase()}
+                  </p>
+                  <p className={styles.movie_cast_role}>
+                    {actor.character ? actor.character.toUpperCase() : "N/A"}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className={styles.movie_crew}>
+          <p className={styles.movie_crew_title}>CREW</p>
+          <div className={styles.movie_crew_list}>
+            {credits.crew.slice(0, 20).map((actor, index) => (
+              <div
+                className={styles.movie_crew_item}
+                key={`${actor.id}-${index}`}
+              >
+                <div className={styles.movie_crew_image}>
+                  <p className={styles.crew_index}>
+                    {index + 1}/20
+                  </p>
+                  <img src={
+                    actor.profile_path
+                      ? getImageUrl(actor.profile_path)
+                      : fallbackProfile
+                    } />
+                </div>
+                <div className={styles.movie_crew_box}>
+                  <p className={styles.movie_crew_name}>
+                    {actor.name.toUpperCase()}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+      <div className={styles.partion}></div>
+      <div className={styles.recommendations_section}>
         <Recommendations id={id} type="movie" />
       </div>
     </>

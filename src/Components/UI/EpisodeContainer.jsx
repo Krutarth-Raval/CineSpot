@@ -1,6 +1,6 @@
 import StarIcon from "@mui/icons-material/Star";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
-import "../../Styles/EpisodeContainer.css";
+import styles from "../../Styles/EpisodeContainer.module.css";
 export const EpisodeContainer = ({ curEpisode, index }) => {
   const {
     name,
@@ -12,29 +12,29 @@ export const EpisodeContainer = ({ curEpisode, index }) => {
     episode_number,
   } = curEpisode;
   return (
-    <div className="episode-card">
-      <p className="ep-number">
+    <div className={styles.episode_card}>
+      <p className={styles.ep_number}>
         EPISDOE <span>{episode_number}</span>
       </p>
-      <div className="episode-runtime-vote">
-        <p className="ep-runtime">
-          {" "}
+      <div className={styles.episode_runtime_vote}>
+        <p className={styles.ep_runtime}>
+          
           {Math.floor(runtime / 60)}h {runtime % 60}m
         </p>
-        <div className="ep-vote">
-          <p className="ep-vote-average">
-            <StarIcon className="star-icon" />
+        <div className={styles.ep_vote}>
+          <p className={styles.ep_vote_average}>
+            <StarIcon className={styles.star_icon} />
             {vote_average.toFixed(1)}
           </p>
-          <p className="ep-vote-count">
-            <ThumbUpIcon className="thumbup-icon" />
+          <p className={styles.ep_vote_count}>
+            <ThumbUpIcon className={styles.thumbup_icon} />
             {vote_count}
           </p>
         </div>
       </div>
-      <p className="episode-name">{name.toUpperCase()}</p>
-      <div className="episode-description">
-        <div className="episode-image">
+      <p className={styles.episode_name}>{name.toUpperCase()}</p>
+      <div className={styles.episode_description}>
+        <div className={styles.episode_image}>
           <img
             src={
               still_path
@@ -44,7 +44,7 @@ export const EpisodeContainer = ({ curEpisode, index }) => {
             alt="name"
           />
         </div>
-        <p className="episode-overview">{overview}</p>
+        <p className={styles.episode_overview}>{overview}</p>
       </div>
     </div>
   );

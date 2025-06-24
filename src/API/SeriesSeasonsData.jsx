@@ -6,7 +6,7 @@ const SeriesSeasonsData = async (seriesId, seasonNumber) => {
       }`
     );
     const data = await response.json();
-    console.log(data);
+    // console.log(data);
     return data.episodes; // Array of episodes
   } catch (error) {
     console.error("Error fetching season data:", error);

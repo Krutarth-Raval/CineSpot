@@ -1,13 +1,13 @@
 @import "../Styles/variables.css";
 
-.top-container {
-  margin-top: 15px;
-  width: 100%;
+.top_container {
+  width: 95%;
   position: relative;
   /* border: 1px solid red; */
+  margin: 20px auto;
 }
 
-.banner-container {
+.banner_container {
   position: relative;
   width: 100%;
   height: 600px;
@@ -16,7 +16,7 @@
   /* overflow: hidden; */
   /* border-bottom-color: none; */
 }
-.banner-container img {
+.banner_container img {
   border-radius: 12px 12px 0 0;
   position: absolute;
   left: 50%;
@@ -27,7 +27,7 @@
   mask-image: linear-gradient(to bottom, #000814, #00081475, transparent);
   opacity: 0.9;
 }
-.network-item {
+.network_item {
   position: absolute;
   top: 10px;
   right: 10px;
@@ -35,17 +35,17 @@
   flex-direction: column;
   justify-content: center;
 }
-.network-logo {
+.network_logo {
   background-color: var(--text-color);
   padding: 10px;
   width: 120px;
   height: auto;
   border-radius: 8px;
 }
-.series-poster {
+.series_poster {
   position: absolute;
   top: 13%;
-  left: 10px;
+  left: 20px;
   padding: 5px;
   border: 2px solid var(--text-color);
   backdrop-filter: blur(2px);
@@ -54,13 +54,13 @@
   overflow: hidden;
   border-radius: 12px;
 }
-.series-poster img {
+.series_poster img {
   border-radius: 12px;
   height: 100%;
   width: 100%;
   object-fit: cover;
 }
-.series-information {
+.series_information {
   /* background-color: #00081457; */
   backdrop-filter: blur(1px);
   background: linear-gradient(to top, #000814, #0008140a);
@@ -72,14 +72,16 @@
   justify-content: left;
   text-align: left;
   padding: 10px;
+  width: 95%;
+  margin: 0 auto;
 }
-.series-information .name {
+.series_information .name {
   color: var(--primary-color);
   font-size: clamp(24px, 8vw, 60px);
   font-weight: bold;
   padding: 10px;
 }
-.series-genre {
+.series_genre {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -97,7 +99,7 @@
   font-weight: 500;
   width: max-content;
 }
-.series-genres-seasons {
+.series_genres_seasons {
   display: flex;
   flex-direction: row;
   gap: 20px;
@@ -115,26 +117,26 @@
   border-radius: 8px;
 }
 
-.series-first-air-year {
+.series_first_air_year {
   position: absolute;
   top: 10px;
-  left: 10px;
+  left: 20px;
 }
-.series-first-air-year .year {
+.series_first_air_year .year {
   font-size: var(--discription-font);
   background: var(--container-bg);
   padding: 5px 10px;
   border-radius: 8px;
 }
 
-.series-rating-box {
+.series_rating_box {
   display: flex;
   flex-direction: row;
   gap: 20px;
   padding: 10px;
 }
-.vote-average,
-.vote-count,
+.vote_average,
+.vote_count,
 .popularity {
   padding: 5px 10px;
   display: flex;
@@ -147,32 +149,31 @@
   border-radius: 8px;
 }
 
-.vote-count .thumbup-icon {
+.vote_count .thumbup_icon {
   color: rgb(0, 183, 255);
 }
-.vote-average .star-icon {
+.vote_average .star_icon {
   color: goldenrod;
 }
-.popularity .whatshot-icon {
+.popularity .whatshot_icon {
   color: rgb(255, 115, 1);
 }
-.series-trailer-details {
+.series_trailer_details {
   display: grid;
   grid-template-columns: auto 1fr;
   text-align: left;
   column-gap: 10px;
 }
-.season-container {
+/* season css  */
+.season_container {
   padding: 10px;
-  width: 100%;
-  /* border: 2px solid var(--primary-color); */
-  border-bottom: none;
-  border-top: none;
+  width: 80%;
+  margin: 0 auto;
   background: linear-gradient(to top, #000814, #000814b6);
   backdrop-filter: blur(3px);
   text-align: left;
 }
-.select-season {
+.select_season {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -182,11 +183,11 @@
   justify-content: space-between;
   border-radius: 12px;
 }
-.select-season-title {
+.select_season_title {
   font-size: var(--title-font);
   color: var(--text-color);
 }
-.season-dropdown {
+.season_dropdown {
   cursor: pointer;
   background-color: var(--bg-color);
   font-size: var(--metadata-font);
@@ -199,44 +200,44 @@
 }
 
 /* Target selected option after clicking */
-.season-dropdown option:checked {
+.season_dropdown option:checked {
   color: var(--text-color);
 }
-.season-numbers {
+.season_numbers {
   font-weight: 400;
 }
 
-.season-info-container {
+.season_info_container {
   margin-top: 10px;
   padding: 10px;
   background-color: var(--container-bg);
   border-radius: 12px 12px 0 0;
 }
 
-.season-year-vote-average {
+.season_year_vote_average {
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 10px;
 }
-.season-number {
+.season_number {
   background-color: var(--primary-color);
   padding: 5px 10px;
   border-radius: 8px;
   color: var(--bg-color);
   font-weight: 600;
-  font-size:var(--metadata-font);
+  font-size: var(--metadata-font);
 }
-.air-date {
+.air_date {
   background-color: var(--bg-color);
   padding: 5px 10px;
   border-radius: 8px;
   color: var(--text-color);
   border: 2px solid var(--text-color);
   font-weight: 500;
-  font-size:var(--metadata-font);
+  font-size: var(--metadata-font);
 }
-.season-vote {
+.season_vote {
   position: absolute;
   right: 18px;
   display: flex;
@@ -249,10 +250,10 @@
   font-size: var(--metadata-font);
   font-weight: 600;
 }
-.season-vote .star-icon {
+.season_vote .star_icon {
   color: goldenrod;
 }
-.season-overview .seasonOverviewTitle {
+.season_overview .seasonOverviewTitle {
   margin-top: 10px;
   margin-bottom: 10px;
   border-bottom: 2px solid var(--bg-color);
@@ -264,11 +265,12 @@
 .seasonOverview {
   font-size: var(--discription-font);
 }
-.episode-container {
+.episode_container {
   background-color: var(--container-bg);
   padding: 10px;
+  border-radius: 0 0 12px 12px;
 }
-.episode-list-title {
+.episode_list_title {
   font-size: var(--title-font);
   font-weight: bold;
   color: var(--primary-color);
@@ -280,26 +282,35 @@
   margin-bottom: 5px;
   text-align: center;
 }
-.episode-list {
-  display: flex;
-  flex-direction: column;
+.episode_list {
+  border: 4px solid var(--bg-color);
+   box-shadow: 0 0 10px var(--bg-color);
+  border-radius: 12px;
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   align-items: stretch;
   width: 100%;
-  height: 100%;
-  padding: 10px;
-  justify-content: flex-start;
+  height: 500px;
+  overflow-y: scroll;
+  scrollbar-width: none;
+  scroll-behavior: smooth;
+  padding: 15px;
   gap: 20px;
-  /* border: 1px solid red; */
 }
 /* ------------------------------------ */
-.middle-container {
+.middle_container {
+  width: 80%;
+  margin: 0 auto;
   /* border: 2px solid var(--primary-color); */
   border-top: none;
   border-bottom: none;
   padding: 10px;
+  background: linear-gradient(to top, #000814, #000814b6);
+  backdrop-filter: blur(3px);
 }
 
-.series-trailer-box {
+.series_trailer_box {
   border: 2px solid var(--bg-color);
   background: var(--container-bg);
   padding: 10px;
@@ -308,38 +319,38 @@
   gap: 10px;
   border-radius: 12px;
 }
-.series-trailer-title {
+.series_trailer_title {
   font-size: var(--title-font);
   padding-bottom: 10px;
   font-weight: bold;
   color: var(--primary-color);
   border-bottom: 2px solid var(--bg-color);
 }
-.series-trailer {
+.series_trailer {
   width: 550px;
   height: 100%;
   padding: 2px;
   border: none;
   border-radius: 12px;
 }
-.series-trailer iframe {
+.series_trailer iframe {
   border-radius: 10px;
   border: none;
   width: 100%;
   height: 100%;
 }
 
-.series-details {
+.series_details {
   width: auto;
   padding: 10px;
   border-radius: 12px;
   border: 2px solid var(--bg-color);
   background-color: var(--container-bg);
 }
-.series-overview-title,
-.series-tagline-title,
-.series-director-title,
-.series-writer-title {
+.series_overview_title,
+.series_tagline_title,
+.series_director_title,
+.series_writer_title {
   font-size: var(--title-font);
   color: var(--primary-color);
   padding: 5px;
@@ -349,15 +360,15 @@
 }
 .overview,
 .tagline,
-.director-name,
-.writer-name {
+.director_name,
+.writer_name {
   margin-bottom: 10px;
   padding: 5px 10px;
-  font-size:var(--discription-font);
+  font-size: var(--discription-font);
 }
 
 /* ------------------------- */
-.media-box {
+.media_box {
   position: absolute;
   top: 45%;
   transform: translateY(-50%);
@@ -368,8 +379,8 @@
   justify-content: center;
 }
 
-.backdrops-media-box,
-.videos-media-box {
+.backdrops_media_box,
+.videos_media_box {
   margin-top: 100px;
   display: flex;
   flex-direction: column;
@@ -379,8 +390,8 @@
   /* background: var(--bg-color); */
 }
 
-.series-backdrops-btn,
-.series-videos-btn {
+.series_backdrops_btn,
+.series_videos_btn {
   background: var(--container-bg);
   border: none;
   border: 2px solid var(--text-color);
@@ -391,7 +402,7 @@
   transform: rotate(90deg);
 }
 
-.modal-container {
+.modal_container {
   position: fixed;
   top: 0px;
   right: 0px;
@@ -405,18 +416,18 @@
   scrollbar-width: none;
   margin: 0 auto;
 }
-.modal-content {
+.modal_content {
   margin: 20px;
   margin-top: 60px;
 }
-.modal-items {
+.modal_items {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   gap: 10px;
 }
-.modal-item img,
-.modal-item iframe {
+.modal_item img,
+.modal_item iframe {
   height: 100%;
   width: 520px;
   margin-bottom: 10px;
@@ -424,11 +435,11 @@
   border-radius: 12px;
 }
 
-.modal-item iframe {
+.modal_item iframe {
   width: 520px;
   height: 300px;
 }
-.modal-close-btn {
+.modal_close_btn {
   cursor: pointer;
   position: fixed;
   top: 10px;
@@ -445,19 +456,19 @@
   font-size: clamp(20px, 2vw, 24px);
 }
 /* --------------------------- */
-.third-container {
+.third_container {
+  width: 80%;
+  margin: 0 auto;
   /* border: 2px solid var(--primary-color); */
   /* background-color: var(--container-bg); */
-  border-radius: 0;
-  border-top: none;
-  border-bottom: none;
-  padding: 10px;
+  border-radius: 12px;
+  padding: 015px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 30px;
 }
-.series-cast-title,
-.series-crew-title {
+.series_cast_title,
+.series_crew_title {
   text-align: left;
   font-size: var(--title-font);
   padding-bottom: 10px;
@@ -466,13 +477,14 @@
   margin-bottom: 15px;
   color: var(--primary-color);
 }
-.series-cast-list,
-.series-crew-list {
+
+.series_cast_list,
+.series_crew_list {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  border: 2px solid var(--primary-color);
-  background-color: var(--bg-color);
+  /* border: 2px solid var(--primary-color); */
+  background-color: var(--container-bg);
   border-radius: 12px;
   height: 420px;
   padding: 10px;
@@ -483,11 +495,10 @@
   margin: 0 auto;
   margin-bottom: 15px;
   /* box-shadow: 0px 0px 10px var(--primary-color); */
-  filter: drop-shadow(0 0 3px var(--primary-color));
 }
-.series-cast-item,
-.series-crew-item {
-  background: var(--container-bg);
+.series_cast_item,
+.series_crew_item {
+  background: var(--bg-color);
   border-radius: 8px;
   width: 330px;
   height: max-content;
@@ -499,21 +510,21 @@
   gap: 5px;
   position: relative;
 }
-.series-cast-image,
-.series-crew-image {
+.series_cast_image,
+.series_crew_image {
   width: 100px;
   height: 100px;
   border-radius: 50%;
 }
-.series-cast-image img,
-.series-crew-image img {
+.series_cast_image img,
+.series_crew_image img {
   height: 100%;
   width: 100%;
   border-radius: 50%;
   object-fit: cover;
 }
-.series-cast-box,
-.series-crew-box {
+.series_cast_box,
+.series_crew_box {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -521,8 +532,8 @@
   align-items: left;
   gap: 10px;
 }
-.cast-index,
-.crew-index {
+.cast_index,
+.crew_index {
   position: absolute;
   right: 5px;
   top: 5px;
@@ -530,30 +541,32 @@
   padding: 1px 5px;
   border-radius: 4px;
 }
-.series-cast-name,
-.series-crew-name {
+.series_cast_name,
+.series_crew_name {
   text-align: left;
   color: var(--text-color);
   font-size: var(--discription-font);
 }
-.series-cast-role {
+.series_cast_role {
   color: var(--small-text-color);
-  font-size:var(--metadata-font);
+  font-size: var(--metadata-font);
   text-align: left;
 }
 /* ------------------- */
-.forth-container {
+.forth_container {
+  width: 80%;
+  margin: 0 auto;
   /* border: 2px solid var(--primary-color); */
   border-top: none;
   padding: 10px;
   border-radius: 0 0 12px 12px;
 }
-.series-data {
+.series_data {
   background: var(--container-bg);
   border-radius: 12px;
   padding: 10px;
 }
-.series-data-title {
+.series_data_title {
   margin-bottom: 15px;
   font-size: var(--title-font);
   padding-bottom: 10px;
@@ -562,45 +575,45 @@
   font-weight: bold;
   border-bottom: 2px solid var(--container-bg);
 }
-.original-language,
-.spoken-languages,
+.original_language,
+.spoken_languages,
 .budget,
 .revenue,
-.origin-country,
-.production-companies,
-.production-countries,
-.in-production {
+.origin_country,
+.production_companies,
+.production_countries,
+.in_production {
   display: flex;
   flex-direction: row;
   margin: 10px 10px;
   border-bottom: 2px solid var(--bg-color);
 }
-.original-language-title,
-.spoken-languages-title,
-.budget-title,
-.revenue-title,
-.origin-country-title,
-.production-companies-title,
-.production-countries-title,
-.in-production-title {
+.original_language_title,
+.spoken_languages_title,
+.budget_title,
+.revenue_title,
+.origin_country_title,
+.production_companies_title,
+.production_countries_title,
+.in_production_title {
   width: 500px;
   text-align: left;
   /* border-left: 5px solid var(--primary-color); */
   padding: 10px;
   width: 100%;
   color: var(--text-color);
-  font-size:var(--title-font);
+  font-size: var(--title-font);
   margin-right: 10px;
 }
 
 .originalLanguage,
 .spokenLanguages,
-.budget-money,
-.revenue-money,
-.origin-country-name,
+.budget_money,
+.revenue_money,
+.origin_country_name,
 .inProduction,
-.production-companies-name,
-.production-countries-name {
+.production_companies_name,
+.production_countries_name {
   color: var(--small-text-color);
   padding: 10px;
   font-size: var(--discription-font);
@@ -611,56 +624,64 @@
   width: 100%;
 }
 
+.partion {
+  border: 2px solid var(--text-color);
+  margin-top: 30px;
+  margin-bottom: 50px;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
 /* ----------------------- */
 @media (max-width: 1300px) {
-  .top-container {
+  .top_container {
     width: 95%;
     margin: 0 auto;
     margin-top: 80px;
   }
-  .banner-container {
+  .banner_container {
     height: 480px;
   }
-  .series-information,
-  .middle-container,
-  .forth-container,
-  .season-container {
+  .series_information,
+  .middle_container,
+  .forth_container,
+  .season_container {
     width: 95%;
     margin: 0 auto;
   }
 
-  .series-poster {
+  .series_poster {
     height: 400px;
     width: 266px;
   }
-  .recommendations-section {
+  .recommendations_section {
     width: 95%;
     margin: 0 auto;
   }
 }
 
 @media (max-width: 1024px) {
-  .banner-container {
+  .banner_container {
     height: 350px;
   }
-  .series-poster {
+  .series_poster {
     height: 300px;
     width: 199px;
   }
-  .series-trailer-details {
+  .series_trailer_details {
     display: flex;
     flex-direction: column;
     gap: 15px;
   }
-  .series-trailer {
+  .series_trailer {
     width: 100%;
     height: 400px;
   }
-  .third-container {
+  .third_container {
     width: 95%;
     margin: 0 auto;
   }
-  .network-logo {
+  .network_logo {
     background-color: var(--text-color);
     padding: 10px;
     width: 60px;
@@ -669,73 +690,80 @@
   }
 }
 @media (max-width: 768px) {
-  .third-container {
+  .third_container {
     display: grid;
     grid-template-columns: 1fr;
   }
-  .original-language,
-  .spoken-languages,
+  .original_language,
+  .spoken_languages,
   .budget,
   .revenue,
-  .origin-country,
-  .production-companies,
-  .production-countries,
-  .in-production {
+  .origin_country,
+  .production_companies,
+  .production_countries,
+  .in_production {
     display: flex;
     flex-direction: column;
   }
   .originalLanguage,
   .spokenLanguages,
-  .budget-money,
-  .revenue-money,
-  .origin-country-name,
+  .budget_money,
+  .revenue_money,
+  .origin_country_name,
   .inProduction,
-  .production-companies-name,
-  .production-countries-name {
+  .production_companies_name,
+  .production_countries_name {
     text-align: left;
   }
-  .modal-item img,
-  .modal-item iframe {
+  .modal_item img,
+  .modal_item iframe {
     height: 100%;
     width: 400px;
     margin-bottom: 10px;
     border: 2px solid var(--text-color);
   }
 
-  .modal-item iframe {
+  .modal_item iframe {
     width: 400px;
     height: 230px;
   }
+
+   .episode_list {
+    grid-template-columns: 1fr;
+    height: 500px;
+    gap: 10px;
+  }
 }
 @media (max-width: 500px) {
-  .banner-container img {
+  .banner_container img {
     display: none;
   }
-  .series-genres-seasons {
+  .series_genres_seasons {
     display: flex;
     flex-wrap: wrap;
     gap: 5px;
     justify-content: center;
   }
-  .series-genre {
+  .series_genre {
     gap: 0px;
   }
-  .series-poster {
+  .series_poster {
     left: 50%;
     transform: translate(-50%);
     margin: 0 auto;
   }
-  .series-rating-box {
+  .series_rating_box {
     margin: 0 auto;
   }
   .runtime {
     margin-left: 10px;
   }
-  .series-trailer {
+  .series_trailer {
     width: 100%;
     height: 210px;
   }
-  .series-information .name {
+  .series_information .name {
     text-align: center;
   }
+ 
 }

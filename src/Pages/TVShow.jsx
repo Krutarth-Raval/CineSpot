@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import { ListCard } from "../Components/UI/ListCard";
-import "../Styles/TvShow.css";
+import style from "../Styles/TvShow.module.css";
 import { GrLinkNext, GrLinkPrevious } from "react-icons/gr";
 import { searchTVShows } from "../API/SeriesData";
 import { NavLink } from "react-router-dom";
@@ -44,7 +44,7 @@ const Series = () => {
   return (
     <>
       {/* SEARCH BAR & BUTTON */}
-      <div className="search-container">
+      <div className={style.search_container}>
         <form
           onSubmit={(e) => {
             e.preventDefault();
@@ -54,29 +54,29 @@ const Series = () => {
           <input
             type="text"
             placeholder="Search TV Shows..."
-            className="search-bar"
+            className={style.search_bar}
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             required={true}
           />
           <NavLink to="/tvshow" target="_blank">
-            <button type="submit" className="search-btn">
+            <button type="submit" className={style.search_btn}>
               Search
             </button>
           </NavLink>
         </form>
       </div>
 
-      <div className="all-series-container">
+      <div className={style.all_series_container}>
         {isLoading ? (
           <Loading />
         ) : noResults ? (
-          <p className="no-results">No TV shows found.</p>
+          <p className={style.no_results}>No TV shows found.</p>
         ) : (
-          <ul className="series-list">
+          <ul className={style.series_list}>
             {(isSearching ? searchResults : AllSeriesData?.results)?.map(
               (curData, index) => (
-                <li key={`${curData.id}-${index}`} className="series-item">
+                <li key={`${curData.id}-${index}`} className={style.series_item}>
                   <ListCard curData={curData} />
                 </li>
               )
@@ -87,9 +87,9 @@ const Series = () => {
 
       {/* PAGINATION BUTTONS */}
       {!noResults && !isSearching && (
-        <div className="pagination">
+        <div className={style.pagination}>
           <button
-            className="page-btn"
+            className={style.page_btn}
             disabled={page === 1}
             style={{
               opacity: page === 1 ? 0.5 : 1,
@@ -97,15 +97,15 @@ const Series = () => {
             }}
             onClick={() => handlePageChange(page - 1)}
           >
-            <GrLinkPrevious className="page-icon" />
+            <GrLinkPrevious className={style.page_icon} />
             Previous Page
           </button>
           <button
             onClick={() => handlePageChange(page + 1)}
-            className="page-btn"
+            className={style.page_btn}
           >
             Next Page
-            <GrLinkNext className="page-icon" />
+            <GrLinkNext className={style.page_icon} />
           </button>
         </div>
       )}

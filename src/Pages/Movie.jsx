@@ -2,9 +2,10 @@ import { useState } from "react";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import { ListCard } from "../Components/UI/ListCard";
 import { Loading } from "./Loading"; // ✅ Import Loader
-import "../Styles/Movie.css";
+import styles from "../Styles/Movie.module.css";
 import { GrLinkNext, GrLinkPrevious } from "react-icons/gr";
 import { SearchMovies } from "../API/MovieData";
+
 
 const Movie = () => {
   const { AllMovies, currentPage } = useLoaderData();
@@ -40,7 +41,7 @@ const Movie = () => {
   return (
     <>
       {/* SEARCH BAR */}
-      <div className="search-container">
+      <div className={styles.search_container}>
         <form
           onSubmit={(e) => {
             e.preventDefault();
@@ -50,28 +51,28 @@ const Movie = () => {
           <input
             type="text"
             placeholder="Search Movies..."
-            className="search-bar"
+            className={styles.search_bar}
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             required
           />
-          <button type="submit" className="search-btn">
+          <button type="submit" className={styles.search_btn}>
             Search
           </button>
         </form>
       </div>
 
-      <div className="all-movie-container">
+      <div className={styles.all_movie_container}>
         {/* SHOW LOADER IF DATA IS LOADING */}
         {isLoading ? (
           <Loading />
         ) : noResults ? (
-          <p className="no-results">No movies found.</p>
+          <p className={styles.no_results}>No movies found.</p>
         ) : (
-          <ul className="movie-list">
+          <ul className={styles.movie_list}>
             {(isSearching ? searchResults : AllMovies?.results)?.map(
               (curData) => (
-                <li key={curData.id} className="movie-item">
+                <li key={curData.id} className={styles.movie_item}>
                   <ListCard curData={curData} />
                 </li>
               )
@@ -82,24 +83,24 @@ const Movie = () => {
 
       {/* PAGINATION BUTTONS */}
       {!isSearching && (
-        <div className="pagination">
+        <div className={styles.pagination}>
           <button
-            className={`page-btn ${page === 1 ? "disabled" : ""}`}
+            className={`${styles.page_btn} ${page === 1 ? styles.disabled : ""}`}
             onClick={() => handlePageChange(page - 1)}
             disabled={page === 1}
           >
-            <GrLinkPrevious className="page-icon" />
+            <GrLinkPrevious className={styles.page_icon} />
             Previous Page
           </button>
           <button
             onClick={() => handlePageChange(page + 1)}
-            className="page-btn"
+            className={styles.page_btn}
           >
             Next Page
-            <GrLinkNext className="page-icon" />
+            <GrLinkNext className={styles.page_icon} />
           </button>
         </div>
-      )}
+      )}s
     </>
   );
 };

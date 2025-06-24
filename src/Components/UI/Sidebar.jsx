@@ -20,7 +20,7 @@ const Sidebar = () => {
         : "2px solid var(--bg-color)",
       background: isActive ? "var(--primary-color)" : "transparent",
       fontWeight: isActive ? "bold" : "normal",
-      transition: "all 0.5s ease",
+      transition: "all 0.3s ease",
     };
   };
   const activeLoginStyle = ({ isActive }) => {
@@ -28,7 +28,7 @@ const Sidebar = () => {
       color: isActive ? "var(--text-color)" : "var(--text-color)",
       borderBottom: isActive ? "4px solid var(--primary-color)" : "none",
       fontWeight: isActive ? "bold" : "normal",
-      transition: "all 0.5s ease",
+      transition: "all 0.3s ease",
     };
   };
 
@@ -38,7 +38,9 @@ const Sidebar = () => {
         <GiHamburgerMenu
           className="hamburger-icon"
           onClick={toggleSidebar}
-          style={{ display: isOpen ? "none" : "block" }}
+          style={{ 
+            display: isOpen ? "none" : "block",
+          }}
         />
         <ImCross
           className="cross-icon"
@@ -55,7 +57,7 @@ const Sidebar = () => {
         className="sidebar-links"
         style={{
           left: isOpen ? "-30px" : "-120%",
-          transition: "left 01s ease-out",
+          transition: "left .5s ease-out",
         }}
       >
         <NavLink

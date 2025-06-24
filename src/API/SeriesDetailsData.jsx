@@ -10,7 +10,7 @@ export const SeriesDetailsData = async ({ params }) => {
     if (!res.ok) throw new Error("Failed to fetch series data");
 
     const data = await res.json(); // ✅ Await the response JSON
-    console.log(data); // ✅ Logs the correct data
+    // console.log(data); // ✅ Logs the correct data
 
     return data; // ✅ Return the parsed data
   } catch (error) {

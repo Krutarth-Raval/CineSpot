@@ -1,9 +1,9 @@
-import "../Styles/Loading.css";
+import styles from "../Styles/Loading.module.css";
 
 export const Loading = () => {
   return (
-    <div className="-loader-box">
-      <div className="loader"></div>
+    <div className={styles._loader_box}>
+      <div className={styles.loader}></div>
     </div>
   );
 };

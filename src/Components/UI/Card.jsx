@@ -1,6 +1,6 @@
-import "../../Styles/Card.css";
+import styles from "../../Styles/Card.module.css";
 
-import { NavLink } from "react-router";
+import { NavLink } from "react-router-dom";
 export const Card = ({ curData, index }) => {
   const { backdrop_path, id, title, name, media_type } = curData;
 
@@ -8,19 +8,20 @@ export const Card = ({ curData, index }) => {
   const type = media_type || (title ? "movie" : name ? "tv" : "unknown");
 
   return (
-    <li className="card">
-      <p className="card-index">{index + 1}</p>
+    <li className={styles.card}>
+      <p className={styles.card_index}>{index + 1}</p>
       <NavLink
         to={`/${type === "movie" ? "movieoverview" : "seriesoverview"}/${id}`}
       >
-        <div className="card-image">
+        <div className={styles.card_image}>
           <img
+           loading="lazy"
             src={`https://image.tmdb.org/t/p/w1280/${backdrop_path}`}
-            alt={id}
+            alt={title || name || "Poster"}
           />
         </div>
-        <div className="card-title">
-          <p className="title">
+        <div className={styles.card_title}>
+          <p className={styles.title}>
             {title?.toUpperCase() || name?.toUpperCase() || "UNTITLED"}
           </p>
         </div>

@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import "../../Styles/Footer.css";
+import styles from "../../Styles/Footer.module.css";
 import {
   FaFacebookSquare,
   FaLinkedin,
@@ -9,82 +9,82 @@ import {
 import { BsTwitterX } from "react-icons/bs";
 const Footer = () => {
   return (
-    <div className="footer">
-      <div className="footer-logo-container">
-        <p className="footer-logo-text">CINESPOT</p>
+    <div className={styles.footer}>
+      <div className={styles.footer_logo_container}>
+        <p className={styles.footer_logo_text}>CINESPOT</p>
       </div>
-      <div className="link-container">
-        <div className="quick-links">
-          <p className="quick-links-title">Quick Links</p>
-          <ul className="quick-links-list">
+      <div className={styles.link_container}>
+        <div className={styles.quick_links}>
+          <p className={styles.quick_links_title}>Quick Links</p>
+          <ul className={styles.quick_links_list}>
             <li>
-              <NavLink className="links" to="/">
+              <NavLink className={styles.links} to="/">
                 HOME
               </NavLink>
             </li>
             <li>
-              <NavLink className="links" to="/movie">
+              <NavLink className={styles.links} to="/movie">
                 MOVIE
               </NavLink>
             </li>
             <li>
-              <NavLink className="links" to="/tvshow">
+              <NavLink className={styles.links} to="/tvshow">
                 TV SHOW
               </NavLink>
             </li>
             <li>
-              <NavLink className="links" to="collection">
+              <NavLink className={styles.links} to="collection">
                 {" "}
                 COLLECTION
               </NavLink>
             </li>
             <li>
-              <NavLink className="links" to="about">
+              <NavLink className={styles.links} to="about">
                 ABOUT
               </NavLink>
             </li>
           </ul>
         </div>
 
-        <div className="social-links">
-          <p className="social-links-title">Social Links</p>
-          <ul className="social-links-list">
+        <div className={styles.social_links}>
+          <p className={styles.social_links_title}>Social Links</p>
+          <ul className={styles.social_links_list}>
             <li>
               <NavLink
                 to="https://www.facebook.com/share/1HAV9Ytj6V/?mibextid=qi2Omg "
-                className="links"
+                className={styles.links}
                 target="_blank"
               >
-                <FaFacebookSquare className="link-icon" />
+                <FaFacebookSquare className={styles.link_icon} />
                 FACEBOOK
               </NavLink>
             </li>
             <li>
               <NavLink
                 to="https://www.instagram.com/raval_krutarth?igsh=aHMzeDk3cm55cXht "
-                className="links"
+                className={styles.links}
                 target="_blank"
               >
-                <FaInstagramSquare className="link-icon" />
+                <FaInstagramSquare className={styles.link_icon} />
                 INSTAGRAM
               </NavLink>
             </li>
             <li>
               <NavLink
                 to="https://x.com/_krutarth_raval?t=wBw3fjx4nzTOmna6nl-ayg&s=08"
-                className="links"
+                className={styles.links}
                 target="_blank"
               >
-                <BsTwitterX className="link-icon" /> X
+                <BsTwitterX className={styles.link_icon }/> X
               </NavLink>
             </li>
             <li>
               <NavLink
                 to="https://www.linkedin.com/in/raval-krutarth?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app "
-                className="links"
+                className={styles.links}
                 target="_blank"
               >
-                <FaLinkedin className="link-icon" />
+                <FaLinkedin className={styles.link_icon }/>
                 LINKEDIN
               </NavLink>
             </li>
@@ -92,10 +92,10 @@ const Footer = () => {
         </div>
       </div>
 
-      <p className="site-rights">
-        Copyright © 2024. All Rights Reserved By{" "}
-        <a href="/" target="_blank" rel="noopener noreferrer">
-          CineSpot
+      <p className={styles.site_rights}>
+        Copyright © 2025. All Rights Reserved By{" "}
+         <a href="/" target="_blank" rel="noopener noreferrer">
+           CineSpot
         </a>
       </p>
     </div>

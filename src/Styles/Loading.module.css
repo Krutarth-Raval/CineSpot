@@ -1,8 +1,8 @@
 /* HTML: <div class="loader"></div> */
 @import "../Styles/variables.css";
 
-.-loader-box {
-  height: 80vh;
+._loader_box {
+  height: 90vh;
   width: auto;
   display: flex;
   justify-content: center;
@@ -11,7 +11,7 @@
 
 .loader {
   width: fit-content;
-  font-size: 40px;
+  font-size: clamp(2rem, 5vw, 3rem);
   line-height: 1.5;
   font-family: var(--logo-font);
   font-weight: bold;
