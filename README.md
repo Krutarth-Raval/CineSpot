@@ -1,9 +1,17 @@
-  <a src="https://cinemaspot.netlify.app/" text-align="center">CineSpot</a>
- # — Your Ultimate Movie & Series Destination
+<h1 align="center">
+  <a href="https://cinemaspot.netlify.app/" target="_blank">🎬 CineSpot</a>
+</h1>
 
-CineSpot is a modern, responsive movie and series web app powered by **React**, **Vite**, and the **TMDb API**. Explore trending, popular, and top-rated entertainment, all in one sleek interface.
+<p align="center">
+  <b>Your Ultimate Movie & Series Destination</b>
+</p>
+
+<p align="center">
+  CineSpot is a modern, responsive movie and series web app powered by <b>React</b>, <b>Vite</b>, and the <b>TMDb API</b>. Explore trending, popular, and top-rated entertainment, all in one sleek interface.
+</p>
 
 ---
+
 
 ## 🌟 Key Features
 
