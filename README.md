@@ -75,15 +75,15 @@ npm run dev
 ```
 Visit http://localhost:5173 in your browser.
 
---- 
-
 
 
 ---
 
 ## 📝 Recent Updates
 ✔️ Updated CSS module filenames for consistency
+
 ✔️ Switched to Axios for improved API calls
+
 ✔️ README Revamped for better project understanding
 
 ---
@@ -102,6 +102,7 @@ Visit http://localhost:5173 in your browser.
 ## 🤝 Contributing
 
 -- Contributions are welcome!
+
 -- Feel free to fork the project, submit PRs, or suggest improvements via Issues.
 
 ---
