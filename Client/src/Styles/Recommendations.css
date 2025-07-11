@@ -1,0 +1,127 @@
+@import "../Styles/variables.css";
+
+.recommendations-container {
+  width: 100%;
+  margin: 10px;
+  margin:10px auto;
+  padding: 10px;
+  background-color: var(--bg-color);
+  border: 2px solid var(--container-bg);
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.recommendations-title {
+  font-size: var(--description-font);
+  background-color: var(--container-bg);
+text-align: left;
+  color: var(--primary-color);
+  padding: 10px;
+  margin-bottom: 10px;
+  font-weight: 600;
+  border-radius: 8px;
+  border-left: 4px solid var(--primary-color);
+}
+
+
+
+
+.recommendations-list {
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  gap: 15px;
+  padding: 10px;
+  -ms-overflow-style: none; /* Hide scrollbar for IE and Edge */
+  scrollbar-width: none;
+    /* Hide scrollbar for Firefox */
+}
+
+.recommendations-list::-webkit-scrollbar {
+  display: none; /* Hide scrollbar for Chrome, Safari */
+}
+
+.recommendation-card {
+  flex: 0 0 auto;
+  width: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  scroll-behavior: smooth;
+  border-radius: 8px;
+  overflow: hidden;
+  text-align: center;
+  background-color: var(--bg-color);
+  border: 2px solid var(--text-color);
+  transition: transform 0.2s ease-in-out;
+}
+
+.recommendation-card:hover {
+  transform: scale(1.03) translate3d(0px, -5px, 0px );
+  border-color: var(--small-text-color);
+}
+
+.recommendation-card img {
+  width: 100%;
+  object-fit: cover;
+}
+
+.recommendation-title {
+  font-size: clamp(14px, 1.8vw, 18px);
+  padding: 5px;
+  color: var(--text-color);
+  font-weight: bold;
+}
+
+.no-recommendations {
+  font-size: clamp(16px, 1.8vw, 20px);
+  color: var(--text-color);
+  text-align: center;
+  margin-top: 10px;
+}
+
+/* Scroll Buttons */
+.recommendations-controls {
+  display: flex;
+  justify-content: right;
+  gap: 30px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.scroll-btn {
+  background-color: var(--primary-color);
+  color: var(--bg-color);
+  font-size: var(--button-font);
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: var(--button-font);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.scroll-btn:hover {
+  background-color: var(--text-color);
+  color: var(--primary-color);
+scale: 1.2;
+
+}
+
+@media (max-width: 768px) {
+  .recommendations-list {
+    padding: 5px;
+    gap: 15px;
+  }
+  .recommendation-card {
+    width: 130px;
+  }
+  .scroll-btn:hover {
+    background-color:var(--primary-color) ;
+    color: var(--bg-color);
+  }
+  
+}

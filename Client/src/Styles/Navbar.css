@@ -1,0 +1,104 @@
+@import "../Styles/variables.css";
+
+.navbar {
+  position: relative;
+  top: .5em;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  background-color: var(--container-bg);
+  width: 95%;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  padding: 5px 5px;
+  display: flex;
+  align-items: center;
+  border-radius: 12px;
+}
+.logo-text {
+  background-color: var(--bg-color);
+  padding: 5px 10px;
+  font-size: 42px;
+  color: var(--primary-color);
+  font-family: var(--logo-font);
+  border-radius: 8px;
+}
+
+.navbar-links {
+  color: var(--text-color);
+  font-size:var(--description-font);
+  width: 100%;
+  margin-left: 30px;
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  gap: 10px;
+}
+.navbar-links .link {
+  padding: 5px 10px;
+}
+.navbar-login .link,
+.navbar-login .link {
+  font-size: var(--description-font);
+  color: var(--text-color);
+}
+.navbar-login {
+  margin-right: 10px;
+}
+ .user-logo{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: var(--bg-color);
+  font-size: var(--title-font);
+  color: var(--text-color);
+  font-weight: 1000;
+}
+.logout-btn{
+  position: absolute;
+  right: 50px;
+  padding-right: 20px;
+  width: max-content;
+  height: 80%;
+  top: 50%;
+  border-radius: 8px;
+  transform: translateY(-50%);
+  color: var(--primary-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  visibility: hidden;
+}
+.user-logo:hover .logout-btn{
+visibility:visible;
+}
+.logout-btn ul{
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+.logout-btn ul li{
+  font-weight: 100;
+cursor: pointer;
+  color:var(--text-color);
+  background-color: var(--container-bg);
+  padding: 10px;
+  list-style: none;
+  border-radius: 4px;
+  font-size: var(--discription-font);
+}
+
+.logout-btn ul li:hover{
+color: var(--primary-color);
+padding-bottom: 0px;
+border-bottom: 5px solid var(--text-color);
+}
+
+@media (max-width: 1300px) {
+  .navbar {
+    display: none;
+  }
+}

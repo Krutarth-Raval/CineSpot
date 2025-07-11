@@ -1,0 +1,142 @@
+@import "../Styles/variables.css";
+@import url("https://fonts.googleapis.com/css2?family=Rowdies:wght@300;400;700&display=swap");
+
+.sidebar {
+  position: fixed;
+  border-bottom: 2px solid var(--bg-color);
+  top: 0;
+  background-color: var(--container-bg);
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  padding: 5px 10px;
+  display: flex;
+  align-items: center;
+  z-index: 900;
+}
+.logo_text {
+  font-size: 35px;
+  color: var(--primary-color);
+  font-family: "Rowdies", sans-serif;
+}
+
+.sidebar_links {
+  position: absolute;
+  left: -100%;
+  top: 50px;
+  background-color: var(--container-bg);
+  height: 100vh;
+  width: 350px;
+  margin-left: 30px;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: all 1s ease-in;
+  border-radius: 0%;
+  z-index: 99999;
+overflow-x:scroll ;
+scrollbar-width: none;
+}
+.login_link {
+  padding: 10px;
+  font-size: var(--description-font);
+  border: 2px solid var(--bg-color);
+  border-radius: 30px;
+  margin: 10px 30px;
+  text-align: center;
+  display: block;
+  transition: all 0.3s ease;
+}
+
+.sidebar_links .link {
+  padding: 10px 10px;
+  font-size: var(--description-font);
+  border: 2px solid var(--bg-color);
+  border-radius: 30px;
+  margin: 10px 30px;
+  text-align: center;
+}
+.sidebar_menu {
+  margin-left: 10px;
+  margin-right: 10px;
+  position: relative;
+  width: 30px;
+  height: 30px;
+  /* border: 1px solid var(--primary-color); */
+}
+.hamburger_icon {
+  font-size: clamp(20px, 2vw, 30px);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+}
+.cross_icon {
+  position: absolute;
+  font-size: clamp(20px, 2vw, 30px);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: none;
+}
+
+.user_details{
+  display: flex;
+  flex-direction: column;
+}
+
+.user_wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: 16px;
+  padding: 10px;
+  border: 2px solid var(--bg-color);
+  border-radius: 12px;
+  margin: 10px;
+}
+
+.user_logo {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: var(--bg-color);
+  font-size: clamp(28px, 10vw, 38px);
+  color: var(--text-color);
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0; /* remove margin-bottom */
+}
+
+.logout_btn {
+  height: auto;
+  width: auto;
+}
+
+.logout_btn ul {
+  display: flex;
+  flex-direction: column; /* side by side */
+  gap: 10px;
+  padding: 0;
+  margin: 0;
+}
+
+.logout_btn ul li {
+  font-weight: 500;
+  font-size: var(--description-font);
+  padding: 8px 14px;
+  border-radius: 20px;
+  border: 2px solid var(--bg-color);
+  color: var(--text-color);
+  cursor: pointer;
+  list-style: none;
+}
+
+@media (min-width: 1300px) {
+  .sidebar {
+    display: none;
+  }
+}

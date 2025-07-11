@@ -1,0 +1,22 @@
+@import "../src/Styles/variables.css"; /* ✅ put this at the top */
+
+
+/* Reset default styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Global body styles */
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: var(--primary-font);
+}
+
+/* Global link styles */
+a {
+  text-decoration: none;
+  color: inherit;
+}

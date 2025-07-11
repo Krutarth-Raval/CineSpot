@@ -1,0 +1,15 @@
+@import "swiper/css";
+@import "swiper/css/navigation";
+@import "swiper/css/pagination";
+
+#root {
+  margin: 0 auto;
+  padding: 1rem 10rem;
+  text-align: center;
+}
+
+@media (max-width: 1300px) {
+  #root {
+    padding: 0rem 0rem;
+  }
+}

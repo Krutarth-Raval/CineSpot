@@ -1,0 +1,68 @@
+@import "../Styles/variables.css";
+.card {
+  height: 100%;
+  width: 100%;
+  /* border: 1px solid yellow; */
+  overflow: hidden;
+  position: relative;
+  list-style: none;
+}
+
+.card_index {
+  position: absolute;
+  top: clamp(2px, 1vw, 10px);
+  left: clamp(2px, 1vw, 10px);
+  background: var(--bg-color);
+  height: clamp(20px, 2vw, 30px);
+  width: clamp(20px, 2vw, 30px);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: var(--metadata-font);
+  background-color: var(--primary-color);
+  color: var(--bg-color);
+}
+.card_image {
+  width: 100%;
+  height: 700px;
+}
+.card_image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card_title {
+  font-weight: bold;
+  position: absolute;
+  text-align: center;
+  left: 50%;
+  transform: translate(-50%);
+  bottom: 30px;
+  background-color: var(--bg-color);
+  border-radius: .4em;
+  padding: 5px 10px;
+  color: var(--primary-color);
+  font-size: var(--title-font);
+}
+
+@media (max-width: 1700px) {
+  .card_image {
+    height: auto;
+  }
+}
+@media (max-width: 1000px) {
+  .card_image {
+    height: auto;
+  }
+}
+@media (max-width: 768px) {
+  .card_image {
+    height: auto;
+  }
+  .card_title {
+    bottom: 5px;
+   
+  }
+}

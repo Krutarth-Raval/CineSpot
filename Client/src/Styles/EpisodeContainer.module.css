@@ -1,0 +1,123 @@
+@import "../Styles/variables.css";
+
+.episode_card {
+  background-color: var(--bg-color);
+  background: #000814dc;
+  /* box-shadow: 0 0 10px var(--bg-color); */
+  display: flex;
+  border-radius: 12px;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px;
+  /* border: 1px solid var(--text-color); */
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+.ep_number {
+  /* background-color: var(--container-bg); */
+  border: 2px solid var(--container-bg);
+  padding: 5px 10px;
+  font-size: var(--metadata-font);
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  gap: 10px;
+  border-radius: 8px;
+  justify-content: center;
+}
+.ep_number span {
+  color: var(--text-color);
+  font-size: var(--discription-font);
+}
+.episode_runtime_vote {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: right;
+  gap: 20px;
+}
+.episode_runtime_vote .ep_runtime {
+  font-size: var(--metadata-font);
+  /* background-color: var(--primary-color); */
+  border: 2px solid var(--container-bg);
+  padding: 5px 10px;
+  border-radius: 8px;
+  /* font-weight: bold; */
+  color: var(--text-color);
+}
+
+.ep_vote {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+}
+
+.ep_vote_average,
+.ep_vote_count {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: var(--metadata-font);
+  /* font-weight: bold; */
+  gap: 5px;
+  background-color: var(--container-bg);
+  padding: 5px 10px;
+  border-radius: 8px;
+  color: var(--text-color);
+}
+
+.ep_vote_average .star_icon {
+  color: goldenrod;
+}
+.ep_vote_count .thumbup_icon {
+  color: rgb(0, 183, 255);
+}
+.episode_description {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  /* flex-direction: row; */
+  align-items: stretch;
+  gap: 20px;
+  width: 100%;
+  text-wrap-style:pretty;;
+}
+.episode_name {
+  font-size: var(--description-font);
+  /* font-weight: 600; */
+  color: var(--primary-color);
+  background-color: var(--container-bg);
+  padding: 5px 10px;
+  border-radius: 8px;
+}
+
+.episode_image {
+  max-width: 500px;
+  height: auto;
+  border-radius: 8px;
+  margin: 0 auto;
+}
+
+.episode_image img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+  /* border: 2px solid var(--text-color); */
+}
+.episode_overview {
+  font-size: var(--discription-font);
+  color: var(--text-color);
+}
+@media (max-width: 1024px) {
+  .episode_description {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .episode_runtime_vote {
+    justify-content: space-between;
+  }
+}

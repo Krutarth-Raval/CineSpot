@@ -1,0 +1,18 @@
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Signika+Negative&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Rowdies:wght@300;400&display=swap");
+
+:root {
+  --text-color: #f0f0f0;
+  --bg-color: #000814;
+  --container-bg: #001d3d;
+  --primary-color: #ffd60a;
+  --small-text-color: #aaaaaa;
+  --title-font:clamp(18px, 2vw, 24px);
+  --discription-font:clamp(14px, 2vw, 16px);
+  --metadata-font:clamp(12px, 2vw, 14px);
+  --button-font:clamp(14px, 2vw, 16px);
+  --secondary-font: "Signika Negative", sans-serif;
+  --primary-font: "Plus Jakarta Sans", sans-serif;
+  --logo-font: "Rowdies", sans-serif;
+}
