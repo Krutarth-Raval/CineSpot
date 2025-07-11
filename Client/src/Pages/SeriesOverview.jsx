@@ -11,6 +11,8 @@ import { Recommendations } from "../Components/UI/Recommendations";
 import { useMemo } from "react";
 import { toast } from "react-toastify";
 import axios from "axios";
+import { useContext } from "react";
+import { AppContent } from "../context/AppContext";
 export const SeriesOverview = () => {
   const params = useParams();
   const SeriesDetails = useLoaderData() || {};
@@ -125,7 +127,8 @@ export const SeriesOverview = () => {
   const handleSeasonChange = async (event) => {
     setSelectedSeason(event.target.value);
   };
-
+  //
+  const { userData, backendUrl } = useContext(AppContent);
   const [isAdded, setIsAdded] = useState(false);
 
   // Ensure axios sends cookies
@@ -134,9 +137,7 @@ export const SeriesOverview = () => {
   useEffect(() => {
     const checkSeriesInCollection = async () => {
       try {
-        const res = await axios.get(
-          "http://localhost:4000/api/collection/user"
-        );
+        const res = await axios.get(`${backendUrl}/api/collection/user`);
         if (res.data.success) {
           const exists = res.data.data.some(
             (item) => item.movieId === params.id
@@ -154,7 +155,7 @@ export const SeriesOverview = () => {
   const addToCollection = async () => {
     try {
       const res = await axios.post(
-        "http://localhost:4000/api/collection/add",
+        `${backendUrl}/api/collection/add`,
         {
           movieId: params.id,
           title: name,

@@ -8,7 +8,8 @@ import { Recommendations } from "../Components/UI/Recommendations";
 import { toast } from "react-toastify";
 import { useEffect } from "react";
 import axios from "axios";
-
+import { useContext } from "react";
+import { AppContent } from "../context/AppContext";
 export const MovieOverview = () => {
   const params = useParams();
   const MovieDetails = useLoaderData();
@@ -86,62 +87,65 @@ export const MovieOverview = () => {
 
   const closeModal = () => setModalOpen(false);
 
-    // Add to collection logic
-    axios.defaults.withCredentials = true;
-    const [isAdded, setIsAdded] = useState(false);
-   useEffect(() => {
-  if (!id) return;
+  // Add to collection logic
+  axios.defaults.withCredentials = true;
+  
+  const { userData, backendUrl } = useContext(AppContent);
+  const [isAdded, setIsAdded] = useState(false);
+  useEffect(() => {
+    if (!id) return;
 
-  const checkCollection = async () => {
-    try {
-      const res = await fetch("http://localhost:4000/api/collection/user", {
-        credentials: "include",
-      });
-      const data = await res.json();
-      console.log("✅ Collection Response", data); // Debug
-      if (data.success) {
-        const exists = data.data.some((movie) => movie.movieId === String(id));
-        setIsAdded(exists);
-      }
-    } catch (err) {
-      console.error("❌ Error checking collection:", err);
-    }
-  };
-
-  checkCollection();
-}, [id]);
-
-
-    const addToCollection = async () => {
+    const checkCollection = async () => {
       try {
-        const response = await fetch("http://localhost:4000/api/collection/add", {
-          method: "POST",
+        const res = await fetch(`${backendUrl}/api/collection/user`, {
           credentials: "include",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            movieId: id,
-            title: title,
-            poster: poster_path,
-          }),
         });
-
-        const data = await response.json();
-
+        const data = await res.json();
+        console.log("✅ Collection Response", data); // Debug
         if (data.success) {
-          toast.success("Movie added to your collection!");
-          setIsAdded(true);
-        } else if (response.status === 409) {
-          toast.info("Movie already in your collection!");
-          setIsAdded(true);
-        } else {
-          toast.warning(data.message || "Could not add movie");
+          const exists = data.data.some(
+            (movie) => movie.movieId === String(id)
+          );
+          setIsAdded(exists);
         }
-      } catch (error) {
-        toast.error("Error: " + error.message);
+      } catch (err) {
+        console.error("❌ Error checking collection:", err);
       }
     };
+
+    checkCollection();
+  }, [id]);
+
+  const addToCollection = async () => {
+    try {
+      const response = await fetch(`${backendUrl}/api/collection/add`, {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          movieId: id,
+          title: title,
+          poster: poster_path,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        toast.success("Movie added to your collection!");
+        setIsAdded(true);
+      } else if (response.status === 409) {
+        toast.info("Movie already in your collection!");
+        setIsAdded(true);
+      } else {
+        toast.warning(data.message || "Could not add movie");
+      }
+    } catch (error) {
+      toast.error("Error: " + error.message);
+    }
+  };
 
   return (
     <>
