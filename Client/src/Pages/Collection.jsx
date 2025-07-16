@@ -38,6 +38,24 @@ const Collection = () => {
       </div>
     );
   }
+const handleRemove = async (movieId) => {
+  try {
+    const res = await fetch(`${backendUrl}/api/collection/remove/${movieId}`, {
+      method: "DELETE",
+      credentials: "include",
+    });
+    const data = await res.json();
+    if (data.success) {
+      toast.success("Removed from collection!");
+      setMovies((prev) => prev.filter((item) => item.movieId !== movieId));
+    } else {
+      toast.error("Failed to remove item.");
+    }
+  } catch (error) {
+    console.error("Error removing item:", error.message);
+    toast.error("Something went wrong.");
+  }
+};
 
   return (
     <div className={style.collection_page}>
