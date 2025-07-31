@@ -1,18 +1,16 @@
+const BACKEND_PROXY = "https://cinespot-server.onrender.com/api/tmdb/proxy";
+
 export const MovieDetailsData = async ({ params }) => {
-  const id = params.id; // Ensure consistency with the route param name
+  const id = params.id;
+
   try {
-    const res = await fetch(
-      `https://api.themoviedb.org/3/movie/${id}?api_key=${
-        import.meta.env.VITE_TMDB_API_KEY
-      }&append_to_response=credits,images,videos`
-    );
+    const endpoint = `/movie/${id}?append_to_response=credits,images,videos`;
+    const response = await fetch(`${BACKEND_PROXY}?endpoint=${encodeURIComponent(endpoint)}`);
 
-    if (!res.ok) throw new Error("Failed to fetch movie data");
+    if (!response.ok) throw new Error("Failed to fetch movie data");
 
-    const data = await res.json(); // ✅ Await the response JSON
-    // console.log(data); // ✅ Logs the correct data
-
-    return data; // ✅ Return the parsed data
+    const data = await response.json();
+    return data;
   } catch (error) {
     console.log("Error fetching movie details:", error);
     return null;

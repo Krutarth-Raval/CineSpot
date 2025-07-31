@@ -1,12 +1,13 @@
+const BACKEND_PROXY = "https://cinespot-server.onrender.com/api/tmdb/proxy";
+
 const SeasonsData = async (seriesId) => {
   try {
-    const response = await fetch(
-      `https://api.themoviedb.org/3/tv/${seriesId}?api_key=${
-        import.meta.env.VITE_TMDB_API_KEY
-      }`
-    );
+    const endpoint = `/tv/${seriesId}`; // `api_key` is added on backend
+    const response = await fetch(`${BACKEND_PROXY}?endpoint=${encodeURIComponent(endpoint)}`);
+
+    if (!response.ok) throw new Error("Failed to fetch series data");
+
     const seriesData = await response.json();
-    // console.log(seriesData);
     return seriesData.seasons;
   } catch (error) {
     console.error("Error fetching series data:", error);
